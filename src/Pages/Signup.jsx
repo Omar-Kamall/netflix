@@ -3,9 +3,25 @@ import { Logo } from "../../public/assets";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { BiShow, BiSolidHide } from 'react-icons/bi';
 import { Link , useLocation , useNavigate } from "react-router-dom";
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import Swal from 'sweetalert2';
 import * as Yup from "yup";
 
 const Signup = () => {
+    const Api_Key = 'AIzaSyBSpjFZAFbHT7us19g_mPXlNlEXkSKFZ5I'
+    const firebaseConfig = {
+        apiKey: Api_Key,
+        authDomain: "netflix-b8a4f.firebaseapp.com",
+        projectId: "netflix-b8a4f",
+        storageBucket: "netflix-b8a4f.firebasestorage.app",
+        messagingSenderId: "119081927679",
+        appId: "1:119081927679:web:bbdf1535d3a79b88f51dca",
+        measurementId: "G-3HHGS3DV0H"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
     const location = useLocation();
     const Navigate = useNavigate();
     const [hide , setHide] = useState(false);
@@ -28,8 +44,30 @@ const Signup = () => {
                             return schema;
                         }}
                         onSubmit={(Values) => {
-                            console.log(Values);
-                            Navigate('/signin');
+                            createUserWithEmailAndPassword(auth, location.state.email, Values.password)
+                            .then((userCredential) => {
+                                // Signed up
+                                const user = userCredential.user;
+                                console.log(user);
+                                Navigate('/signin');
+                            })
+                            .catch((error) => {
+                                const Error ={
+                                    "auth/email-already-in-use": "Email Already In Use",
+                                    "auth/invalid-email": "Password Is Not Valid",
+                                    "auth/weak-password": "Password Is Weak",
+                                    "auth/missing-password": "Password Is Wrong",
+                                    "auth/network-request-failed": "Network Is Not Available",
+                                    "auth/too-many-requests": "Alot Of Request",
+                                    "auth/internal-error": "Wrong"
+                                }
+                                const errorMessage = Error[error.code] ;
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: errorMessage,
+                                });
+                            });
                         }}
                     >
                         <Form className="text-black mt-10! flex flex-col gap-2">

@@ -19,7 +19,6 @@ const Trending = () => {
         axios.get(Base_Link + Films_Link + Api_Key)
         .then(res => {
             setMovies(res.data.results);
-            console.log(res.data.results);
         }).catch(error => {
             console.log(error);
         })

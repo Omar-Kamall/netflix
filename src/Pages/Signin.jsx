@@ -3,10 +3,27 @@ import { Logo } from "../../public/assets";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { BiShow, BiSolidHide } from 'react-icons/bi';
 import { Link , useNavigate } from "react-router-dom";
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import Swal from 'sweetalert2';
 import * as Yup from "yup";
 import '../App.css';
 
+
 const Signin = () => {
+    const Api_Key = 'AIzaSyBSpjFZAFbHT7us19g_mPXlNlEXkSKFZ5I'
+    const firebaseConfig = {
+        apiKey: Api_Key,
+        authDomain: "netflix-b8a4f.firebaseapp.com",
+        projectId: "netflix-b8a4f",
+        storageBucket: "netflix-b8a4f.firebasestorage.app",
+        messagingSenderId: "119081927679",
+        appId: "1:119081927679:web:bbdf1535d3a79b88f51dca",
+        measurementId: "G-3HHGS3DV0H"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
     const Navigate = useNavigate();
     const [hide , setHide] = useState(false);
     return (
@@ -28,10 +45,28 @@ const Signin = () => {
                                 })
                                 return userSchema
                             }}
-                            onSubmit={(Values , { resetForm }) => {
-                                console.log(Values);
-                                Navigate('/home');
-                                resetForm();
+                            onSubmit={(Values) => {
+                                signInWithEmailAndPassword(auth, Values.email, Values.password)
+                                .then((userCredential) => {
+                                    const user = userCredential.user;
+                                    console.log(user);
+                                    Navigate('/home');
+                                })
+                                .catch((error) => {
+                                    const errorMessages ={
+                                        "auth/user-not-found": "Email Is Not Found",
+                                        "auth/wrong-password": "Password Is Wrong",
+                                        "auth/invalid-credential": "Email Or Password Is Wrong",
+                                        "auth/invalid-email": "Invalid Email",
+                                        "auth/too-many-requests": "The account has been temporarily blocked due to failed attempts",
+                                    }
+                                    const errorMessage = errorMessages[error.code];
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Oops...",
+                                        text: errorMessage,
+                                    });
+                                });
                             }}
                         >
                             <Form className="bg-[#00000089] py-8! px-12! flex flex-col justify-center items-center gap-4">
