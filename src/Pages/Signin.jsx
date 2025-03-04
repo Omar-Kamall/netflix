@@ -11,7 +11,7 @@ const Signin = () => {
     const [hide , setHide] = useState(false);
     return (
         <section className="bg-black h-full w-full bg-cover bg-center signin">
-            <div className="bg-[rgba(0,0,0,0.60)] h-[100vh]">
+            <div className="bg-[rgba(0,0,0,0.60)] pb-12!">
                 <div className="mx-[5%]!">
                     <nav>
                         <div className="container mx-auto! flex justify-between">

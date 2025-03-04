@@ -4,7 +4,7 @@ import Icon_Lang from "./icon-langauge.png";
 import Box1 from "./box1.png";
 import Box2 from "./box2.png";
 import Box3 from "./box3.png";
-import Box4 from "./Box4.png";
+import Box4 from "./box4.png";
 
 export {
     Logo ,
