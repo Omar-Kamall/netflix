@@ -6,6 +6,10 @@ import Display from './Pages/Display'
 import Signin from './Pages/Signin'
 import Signup from './Pages/Signup'
 import Home from './Pages/Home'
+import Trending from './Pages/Trending'
+import Popular from './Pages/Popular'
+import Action from './Pages/Action'
+import Drama from './Pages/Drama'
 import './App.css'
 
 const Layout = () => {
@@ -24,12 +28,16 @@ const App = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    },3000)
+    },0)
   },[])
   const router = createBrowserRouter(createRoutesFromElements(
     <Route>
       <Route path='/home' element={<Layout/>}>
         <Route index element={<Home/>}/>
+        <Route path='trending' element={<Trending/>}/>
+        <Route path='popular' element={<Popular/>}/>
+        <Route path='action' element={<Action/>}/>
+        <Route path='drama' element={<Drama/>}/>
       </Route>
       <Route path='/' element={<Display />}/>
       <Route path='/signin' element={<Signin/>}/>

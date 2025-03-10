@@ -48,8 +48,7 @@ const Signin = () => {
                             onSubmit={(Values) => {
                                 signInWithEmailAndPassword(auth, Values.email, Values.password)
                                 .then((userCredential) => {
-                                    const user = userCredential.user;
-                                    console.log(user);
+                                    userCredential.user;
                                     Navigate('/home');
                                 })
                                 .catch((error) => {

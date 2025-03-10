@@ -58,7 +58,7 @@ const Trending = () => {
                             className="mySwiper">
                             {movies.map(movie => (
                                 <SwiperSlide key={movie.id}>
-                                    <img className='rounded-2xl' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                                    <img className='rounded-2xl' loading='lazy' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                                 </SwiperSlide>
                             ))}
                     </Swiper>

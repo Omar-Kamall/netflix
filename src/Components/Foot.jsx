@@ -5,7 +5,7 @@ const Foot = () => {
         <footer className="bg-black">
             <div className="container mx-auto!">
                 <div className="mx-[5%]!">
-                    <div className="text-gray-400 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-5!">
+                    <div className="text-gray-400 z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-5!">
                         <div className="flex flex-col gap-3">
                             <Link className="hover:text-red-600 transform duration-300">FAQ</Link>
                             <Link className="hover:text-red-600 transform duration-300">Investor Relations</Link>
