@@ -11,7 +11,9 @@ import { Link } from 'react-router';
 
 
 const Data_All = (props) => {
+    const [show_Video , setShow_Video] = useState(false);
     const [data , setData] = useState([]);
+    const [videoKey , setVideoKey] = useState(null);
     const Api_Key = '&api_key=db440912d17a65099b000c34c18a0853';
     const Base_Link = 'https://api.themoviedb.org/3';
     const link = props.kind;
@@ -22,7 +24,8 @@ const Data_All = (props) => {
         })
         .catch(error => {
             console.error(error);
-        })
+        });
+        setVideoKey("xkxnYxfrz4M?si=rEWtciSEtfkoCsLK");
     },[link])
     return (
         <section className="bg-black pb-8!">
@@ -57,10 +60,17 @@ const Data_All = (props) => {
                         className="mySwiper">
                         {data.map(item => (
                             <SwiperSlide key={item.id}>
-                                <img className='rounded-2xl' loading='lazy' src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
+                                <img onClick={() => setShow_Video(true)} className='rounded-2xl' loading='lazy' src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
                             </SwiperSlide>
                         ))}
                 </Swiper>
+                {show_Video ? document.body.classList.add("overflow-hidden") : document.body.classList.remove("overflow-hidden")}
+                {show_Video && <div className='bg-black fixed inset-0 flex items-center justify-center h-full cursor-pointer z-50'>
+                    <div className="absolute inset-0" onClick={() => setShow_Video(false)}></div>
+                    <div className="relative mx-[5%]! mt-10! flex items-center w-full h-[55vh] md:h-[80vh]">
+                        <iframe src={`https://www.youtube.com/embed/${videoKey}`} allowFullScreen className='w-full h-[55vh] md:h-[80vh] shadow-gray-700 shadow-lg rounded-2xl'></iframe>
+                    </div>
+                </div>}
             </div>
         </section>
     )

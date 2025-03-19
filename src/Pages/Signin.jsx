@@ -45,8 +45,8 @@ const Signin = () => {
                                 })
                                 return userSchema
                             }}
-                            onSubmit={(Values) => {
-                                signInWithEmailAndPassword(auth, Values.email, Values.password)
+                            onSubmit={async (Values) => {
+                                await signInWithEmailAndPassword(auth, Values.email, Values.password)
                                 .then((userCredential) => {
                                     userCredential.user;
                                     Navigate('/home');
