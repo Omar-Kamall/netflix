@@ -1,15 +1,17 @@
 import { createBrowserRouter , createRoutesFromElements , Route , Outlet , RouterProvider } from 'react-router-dom'
 import { useState , useEffect } from 'react'
-import Navbar from './Components/Navbar'
-import Footer from './Components/Footer'
-import Display from './Pages/Display'
-import Signin from './Pages/Signin'
-import Signup from './Pages/Signup'
-import Home from './Pages/Home'
-import Trending from './Pages/Trending'
-import Popular from './Pages/Popular'
-import Action from './Pages/Action'
-import Drama from './Pages/Drama'
+import { lazy , Suspense } from 'react';
+import FadeLoader from 'react-spinners/FadeLoader';
+const Navbar = lazy(() => import ('./Components/Navbar'))
+const Footer = lazy(() => import ('./Components/Footer'))
+const Display = lazy(() => import ('./Pages/Display'))
+const Signin = lazy(() => import ('./Pages/Signin'))
+const Signup = lazy(() => import ('./Pages/Signup'))
+const Home =lazy(() => import ('./Pages/Home'))
+const Trending = lazy(() => import ('./Pages/Trending'))
+const Popular = lazy(() => import ('./Pages/Popular'))
+const Action = lazy(() => import ('./Pages/Action'))
+const Drama = lazy(() => import ('./Pages/Drama'))
 import './App.css'
 
 const Layout = () => {
@@ -28,11 +30,14 @@ const App = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    },0)
+    },3000)
   },[])
   const router = createBrowserRouter(createRoutesFromElements(
     <Route>
-      <Route path='/home' element={<Layout/>}>
+      <Route path='/home' element={<Suspense fallback={<div className='bg-black h-[100vh] flex justify-center items-center'>
+          <FadeLoader color='red'/></div>}>
+          <Layout/>
+        </Suspense>}>
         <Route index element={<Home/>}/>
         <Route path='trending' element={<Trending/>}/>
         <Route path='popular' element={<Popular/>}/>
@@ -55,7 +60,9 @@ const App = () => {
           <span>L</span>
           <span>I</span>
           <span>X</span>
-        </span></div> : <RouterProvider router={router}/>
+        </span></div> : <Suspense fallback={<div className='bg-black h-[100vh] flex justify-center items-center'>
+          <FadeLoader color='red'/>
+        </div>}><RouterProvider router={router}/></Suspense>
       }
     </>
   )
