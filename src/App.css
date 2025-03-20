@@ -37,11 +37,6 @@
     transform: translateY(0px);
   }
 }
-/* Head */
-.HEAD{
-  background-image: url('../public/assets/EG-en-20250224-TRIFECTA-perspective_928c688e-939a-402e-a8cf-a219844b9522_large.jpg');
-  background-repeat: no-repeat;
-}
 /* Sign In */
 @media screen and (min-width: 550px){
   .signin{
