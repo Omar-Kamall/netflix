@@ -7,7 +7,7 @@ import * as Yup from "yup";
 const Head = () => {
     const navigate = useNavigate();
     return (
-        <header style={{background: `url(${Img_Head})`}} className="h-full w-full bg-cover bg-center">
+        <header style={{background: `url(${Img_Head})`, backgroundSize: "cover" , backgroundPosition: "center" , backgroundRepeat: "no-repeat"}} className="h-full w-full bg-cover bg-center">
             <div className="bg-[rgba(0,0,0,0.74)]">
                 <div className="mx-[5%]!">
                     <nav>
