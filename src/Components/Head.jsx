@@ -1,4 +1,4 @@
-import { Logo } from "../../public/assets"
+import { Img_Head, Logo } from "../../public/assets"
 import { Link , useNavigate } from "react-router-dom"
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -7,7 +7,7 @@ import * as Yup from "yup";
 const Head = () => {
     const navigate = useNavigate();
     return (
-        <header style={{background: `url("../public/assets/EG-en-20250224-TRIFECTA-perspective_928c688e-939a-402e-a8cf-a219844b9522_large.jpg")`, backgroundSize: "cover" , backgroundPosition: "center" , backgroundRepeat: "no-repeat"}} className="h-full w-full bg-cover bg-center">
+        <header className="HEAD h-full w-full bg-cover bg-center">
             <div className="bg-[rgba(0,0,0,0.74)]">
                 <div className="mx-[5%]!">
                     <nav>
